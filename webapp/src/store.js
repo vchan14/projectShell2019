@@ -31,18 +31,41 @@ export default new Vuex.Store({
     },
 
     removeToDo(state, todo) {
-      state.todos.splice(todo.id-1)
+      var index = 0 
+      while (index < state.todos.length) {
+        if(state.todos[index].id == todo.id) {
+            break
+        }
+        index = index + 1
+      }
+      state.todos.splice(index, 1)
+ 
 
     },
 
     tickToDo(state, todo) {
-      debugger;
-      state.todos = state.todos.map((td) => {
-        if (td === todo) {
-          return {...td, done: !td.done}
+      // debugger;
+      var index = 0 
+      while (index < state.todos.length) {
+        if(state.todos[index].id == todo.id) {
+            break
         }
-        return td;
-      })
+        index = index + 1
+      }
+      debugger
+      state.todos[index].done = !state.todos[index].done;
+      state.todos[1].done = true
+      
+
+
+
+      
+      // state.todos = state.todos.map((td) => {
+      //   if (td.id == todo.id) {
+      //     return {...td, done: !td.done}
+      //   }
+      //   return td;
+      // })
     }
   },
   actions: {
@@ -52,6 +75,7 @@ export default new Vuex.Store({
     },
 
     removeToDo({ commit }, toDo) {
+      debugger
       commit("removeToDo", toDo)
     },
 

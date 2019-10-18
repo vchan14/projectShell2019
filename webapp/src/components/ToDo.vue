@@ -1,7 +1,7 @@
 <template>
  <!-- v-model="todo.done"  -->
   <div class="todo">
-    <input type="checkbox" @change="checkToDo(todo)" />
+    <input type="checkbox" v-bind:checked="todo.done" v-on:click="checkToDo(todo)" />
     <span class="todo-title">
       {{ todo.title }}
     </span>
@@ -23,11 +23,14 @@ export default {
   },
   methods: {
     deleteToDo (todo) {
+        debugger
         this.$store.dispatch('removeToDo', todo)    
     },
 
     checkToDo (todo) {
+        debugger
         this.$store.dispatch('tickToDo', todo)
+      
     }
   
   }

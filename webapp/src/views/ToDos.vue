@@ -7,7 +7,7 @@
     </div>
     <div class="columns is-centered">
       <div class="column is-half">
-        <template v-for="todo in todos" :myToDo="this.todo" @delete="deleteToDo">
+        <template v-for="todo in todos">
           <ToDo :key="todo.id" :todo="todo" />
         </template>
       </div>
@@ -52,15 +52,11 @@ export default {
   methods: {
     onSubmit () {
       this.$store.dispatch('addToDo', this.newTodo).then(() => {
-        debugger
+        // debugger
         this.newTodo.title = null;
       })
-    },
-    deleteToDo () {
-      debugger
-      this.$store.dispatch('deleteToDo', myToDo)
-
     }
+
 
   }
 };
