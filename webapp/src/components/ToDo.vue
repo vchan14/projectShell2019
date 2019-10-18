@@ -1,12 +1,11 @@
 <template>
+ <!-- v-model="todo.done"  -->
   <div class="todo">
-    <b-checkbox v-model="todo.done" />
+    <input type="checkbox" @change="checkToDo(todo)" />
     <span class="todo-title">
       {{ todo.title }}
     </span>
     <button v-on:click="deleteToDo(todo)"> Delete </button>
-
-
 
   </div>
 </template>
@@ -24,8 +23,13 @@ export default {
   },
   methods: {
     deleteToDo (todo) {
-        debugger
-        this.$store.dispatch('removeToDo', todo)    }
+        this.$store.dispatch('removeToDo', todo)    
+    },
+
+    checkToDo (todo) {
+        this.$store.dispatch('tickToDo', todo)
+    }
+  
   }
 
 };

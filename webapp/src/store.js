@@ -33,6 +33,16 @@ export default new Vuex.Store({
     removeToDo(state, todo) {
       state.todos.splice(todo.id-1)
 
+    },
+
+    tickToDo(state, todo) {
+      debugger;
+      state.todos = state.todos.map((td) => {
+        if (td == todo) {
+          return {...td, done: !td.done}
+        }
+        return td;
+      })
     }
   },
   actions: {
@@ -43,6 +53,10 @@ export default new Vuex.Store({
 
     removeToDo({ commit }, toDo) {
       commit("removeToDo", toDo)
+    },
+
+    tickToDo({ commit }, toDo) {
+      commit("tickToDo", toDo)
     }
 
 
