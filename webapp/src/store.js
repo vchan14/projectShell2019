@@ -38,7 +38,7 @@ export default new Vuex.Store({
     tickToDo(state, todo) {
       debugger;
       state.todos = state.todos.map((td) => {
-        if (td == todo) {
+        if (td === todo) {
           return {...td, done: !td.done}
         }
         return td;
