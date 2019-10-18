@@ -4,6 +4,10 @@
     <span class="todo-title">
       {{ todo.title }}
     </span>
+    <button v-on:click="deleteToDo(todo)"> Delete </button>
+
+
+
   </div>
 </template>
 
@@ -17,6 +21,12 @@ export default {
         return {};
       }
     }
+  },
+  methods: {
+    deleteToDo (todo) {
+        debugger
+        this.$store.dispatch('removeToDo', todo)    }
   }
+
 };
 </script>
