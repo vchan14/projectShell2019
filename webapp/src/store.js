@@ -41,6 +41,7 @@ export const actions = {
   },
   addToDo({ commit }, toDo) {
     return axios.post("/api/todos", toDo).then(response => {
+      debugger
       commit("addToDo", response.data);
     });
   },
