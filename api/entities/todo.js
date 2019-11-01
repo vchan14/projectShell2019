@@ -8,6 +8,7 @@ import User from './user';
 
 @Entity()
 export default class ToDo {
+  
   @PrimaryGeneratedColumn()
   id
 
