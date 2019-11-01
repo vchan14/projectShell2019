@@ -62,14 +62,14 @@
             <b-input v-model="newTodo.title" />
           </b-field>
           <b-field label="Category">
-            <b-select placeholder="Select a Category">
-                <option value= "cat1" key="cat1">
+            <b-select placeholder="Select a Category" v-model="newTodo.category">
+                <option value= "1" key="cat1">
                   cat 1
                 </option>
-                <option value= "cat2" key="cat2">
+                <option value= "2" key="cat2">
                   cat 2
                 </option>
-                <option value= "cat3" key="cat3">
+                <option value= "3" key="cat3">
                   cat 3
                 </option>
             </b-select>
@@ -92,13 +92,13 @@ export default {
   data: function() {
     return {
       newTodo: {
-        title: null
+        title: null,
+        category: -1
       }
     };
   },
   computed: {
     todos() {
-      debugger
       return this.$store.state.todos;
     }
   },
@@ -107,8 +107,11 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch("addToDo", this.newTodo).then(() => {
+      debugger
+      this.$store.dispatch("addToDo", this.newTodo ).then(() => {
+        debugger
         this.newTodo.title = null;
+        this.newTodo.category = -1; 
       });
     }
   },

@@ -12,8 +12,11 @@ export const mutations = {
     state.loginState = { ...state.loginState, loggedIn: false };
   },
   addToDo(state, todo) {
+    console.log(todo.category)
+    debugger
     state.todoIdx = state.todoIdx + 1;
-    state.todos = [...state.todos, { ...todo, done: false, id: state.todoIdx }];
+    debugger
+    state.todos = [...state.todos, { ...todo, done: false, id: state.todoIdx, category: todo.category }];
   },
   updateToDo(state, todo) {
     state.todos = state.todos.map(td => (td.id === todo.id ? todo : td));
@@ -40,9 +43,12 @@ export const actions = {
     });
   },
   addToDo({ commit }, toDo) {
+    debugger
     return axios.post("/api/todos", toDo).then(response => {
-      debugger
-      commit("addToDo", response.data);
+      commit("addToDo", {
+        title : toDo.title,
+        category : toDo.category
+      });
     });
   },
   updateTodo({ commit }, toDo) {
