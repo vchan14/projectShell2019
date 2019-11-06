@@ -7,26 +7,26 @@ const router = Router();
 router.route('/address')
   .all(isAuthenticated)
   .get((req, res) => {
-    res.send(req.user.todos);
+    res.send(req.user.address);
   })
   .post((req, res) => {
-    const { done, title, category } = req.body;
+    const { street_name, street_number, zip_code, state, city, user } = req.body;
     const manager = getManager();
-    const todo = manager.create(ToDo, { done, title, category });
-    todo.user = req.user;
-    manager.save(todo).then((savedTodo) => {
-      res.send(savedTodo);
+    const address = manager.create(Address, { street_name, street_number, zip_code, state, city, user });
+    address.user = req.user;
+    manager.save(address).then((savedAddress) => {
+      res.send(savedAddress);
     });
   });
 
   
-router.route('/todos/:id')
+router.route('/address/:id')
   .all(isAuthenticated)
   .all((req, res, next) => {
     getRepository(ToDo).findOneOrFail(
       { where: { userId: req.user.id, id: req.params.id } },
-    ).then((_foundTodo) => {
-      req.todo = _foundTodo;
+    ).then((_foundAddress) => {
+      req.address = _foundAddress;
       next();
     }, () => {
       res.send(404);
@@ -34,20 +34,26 @@ router.route('/todos/:id')
   })
   .put((req, res) => {
     debugger
-    const foundTodo = req.todo;
-    const { title, done, category } = req.body;
-    foundTodo.title = title;
-    foundTodo.done = done;
-    foundTodo.category = category;
-    getManager().save(foundTodo).then((updatedTodo) => {
-      res.send(updatedTodo);
+    const _foundAddress = req.address;
+    const { street_name, street_number, zip_code, state, city, user  } = req.body;
+    foundAddress.street_name = street_name;
+    foundAddress.street_number = street_number; 
+    foundAddress.zip_code = zip_code;
+    foundAddress.state = state;
+    foundAddress.city = city;
+    foundAddress.user = user;
+
+
+
+    getManager().save(foundAddress).then((updatedAddress) => {
+      res.send(updatedAddress);
     });
   })
   .get((req, res) => {
-    res.send(req.todo);
+    res.send(req.address);
   })
   .delete((req, res) => {
-    getManager().delete(ToDo, req.todo.id).then(() => {
+    getManager().delete(Address, req.address.id).then(() => {
       res.send(200);
     });
   });
