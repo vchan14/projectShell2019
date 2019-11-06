@@ -7,7 +7,7 @@ const router = Router();
 router.route('/todos')
   .all(isAuthenticated)
   .get((req, res) => {
-    res.send(req.user.todos);
+    res.send(req.user.todos); //@@ why todos?
   })
   .post((req, res) => {
     const { done, title, category } = req.body;

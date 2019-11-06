@@ -18,8 +18,7 @@ import {
     title
 
     @ManyToMany( () => Item, (item) => item.category, {eager: true})
-    item 
-
+    item
 
   }
   
